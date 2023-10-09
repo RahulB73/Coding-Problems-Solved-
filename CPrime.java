@@ -3,24 +3,31 @@
 import java.util.*;
 
 public class CPrime {
-
+    
+    
     static boolean isCirPrime(int num) {
         // Coverting number to string
-        String strNum = String.valueOf(num);
+        // String strNum = String.valueOf(num);
 
         // Finding length of the string
-        int length = strNum.length();
+        // int length = strNum.length();
+        int length = count(num);
 
         for (int i = 0; i < length; i++) {
             // Cheaking the number is prime or not + if not prime return false
             // strNum is again converted to integer
 
-            if (!isPrime(Integer.parseInt(strNum))) {
+            //if (!isPrime(Integer.parseInt(strNum))) {
+            //     return false;
+            // }
+            
+            if(!isPrime(num)){
                 return false;
             }
 
             // Rotating the number
-            strNum = strNum.substring(1) + strNum.charAt(0);
+            // strNum = strNum.substring(1) + strNum.charAt(0);
+            num = rotate(num);
         }
         return true;
     }
@@ -37,6 +44,24 @@ public class CPrime {
             }
         }
         return true;
+    }
+    
+    // Counting the lenght of number
+    static int count(int num){
+        int count = 0;
+        while(num > 0){
+            count++;
+            num = num / 10;
+        }
+        return count;
+    }
+    
+    // rotating the digit
+    static int rotate(int num){
+        int length = count(num);
+        int n1 = num % 10;
+        int n2 = num / 10;
+        return ( n1 * (int) Math.pow(10, length - 1)) + n2;
     }
 
     public static void main(String[] args) {
